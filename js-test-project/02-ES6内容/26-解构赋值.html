@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    var obj = {name:"abc", age:18};
+
+    // 使用解构赋值的方式获取name、age
+    let { name } = obj; // 创建了一个变量name, 值为obj.name
+    console.log(name);
+
+    let { age } = obj;
+    console.log(age);
+
+    var obj3 = {gender:"abc", height:20, grade:"一年级"};
+    var {grade, height, gender} = obj3;
+    // 创建了 grade = obj3.grade
+    // 创建了 height = obj3.height
+    // 创建了 gender = obj3.gender
+
+
+    // 解构赋值的意义：
+    function fn(option) {
+        option.width;
+        option.height;
+        option.age;
+    }
+    fn({width:100, height:100, age:50});
+
+    function fn_2({ width, height, age }) {
+        // 创建了 width、height、age三个局部变量，值来自于实参
+    }
+    fn_2({width:100, height:100, age:50})
+
+
+    // 解构赋值的其他用法
+    var obj = {name:"哈哈", age:18};
+    // 创建一个新的变量：objName，值=obj.name
+    var { name:objName } = obj;
+    // 创建了2个新变量
+    var { name:objName2, age:objAge2 } = obj;
+
+
+</script>
+
+</html>

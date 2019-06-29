@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    function getBooks() {
+        // 执行resolve()表示异步操作成功
+        // 执行reject()表示异步操作失败
+        return new Promise( (resolve, reject) => {
+            $.ajax( {
+                url : "/getBooks",
+                success(res) {
+                    // 成功获取数据
+                    resolve(res); // 异步操作成功
+                },
+                error(res) {
+                    // res表示错误信息，若失败，执行error()
+                    // 通过执行reject()，把错误信息传给外界
+                    reject(res);
+                }
+            })
+        })
+    }
+
+
+    // 第1种错误处理方式
+    getBooks().then(
+        res => {
+            // res表示请求成功时获取到的数据
+        },
+        resError => {
+            // resError是reject()传出的错误信息
+            console.log(resError);
+        }
+    )
+
+
+    // 第2中错误处理方式
+    getBooks().then(
+        res => {
+            // 成功处理
+        }
+    ).catch(
+        resError => {
+            // 错误处理
+        }
+    )
+
+
+    // 上面2种错误处理方式，推荐第2种，第2种方式的强大之处在于：
+    //   a、可以捕获到reject()传递的参数
+    //   b、还可以捕获到：成功的回调中发生的错误
+
+</script>
+
+</html>

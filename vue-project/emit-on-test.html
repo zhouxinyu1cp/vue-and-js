@@ -1,0 +1,155 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .userList {
+            border: 1px solid red;
+            margin: 20px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id = "app">
+        <dom-a></dom-a>
+
+        <dom-b></dom-b>
+
+        <dom-c></dom-c>
+    </div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+
+        // 全局Vue实例，用于绑定不同的平行组件，方便组件间传值
+        var Event = new Vue();
+
+
+        var A = {
+            template : `
+                <div>
+                    <span>我是A组件的数据->{{a}}</span>
+
+                    <input type = "button" value = "把A数据传给C" @click = "send">
+                </div>
+            `,
+
+            data : function() {
+                return {
+                    a : "a组件的数据"
+                }
+            },
+
+            methods : {
+                send() {
+                    // 绑定自定义事件 msg-a 到实例 Event 上，同时传递数据 a
+                    Event.$emit("msg-a", this.a);
+                }
+            }
+        };
+
+        var B = {
+            template : `
+                <div>
+                    <span>我是B组件的数据->{{b}}</span>
+
+                    <input type = "button" value = "把B数据传给C" @click = "send">
+                </div>
+            `,
+
+            data : function() {
+                return {
+                    b : "b组件的数据"
+                }
+            },
+
+            methods : {
+                send() {
+                    // 绑定自定义事件 msg-b 到实例 Event 上，同时传递数据 b
+                    Event.$emit("msg-b", this.b);
+                }
+            }
+        };
+
+        var C = {
+            template : `
+                <div>
+                    <h3>我是C组件</h3>
+                    <span>接受A组件的数据->{{a}}</span>
+                    <br />
+                    <span>接受B组件的数据->{{b}}</span>
+                </div>
+            `,
+
+            data : function() {
+                return {
+                    a : "",
+                    b : "",
+                }
+            },
+
+            mounted() {
+
+                // $on("事件名", fn(参数) => {})
+
+                // 接收事件"msg-a"传来的数据a
+                Event.$on("msg-a", (a) => {
+                    this.a = a;
+                });
+
+                // 接收事件"msg-b"传来的数据b
+                Event.$on("msg-b", (b) => {
+                    this.b = b;
+                });
+            }
+        }
+    
+
+        new Vue({
+            el : "#app",
+
+            components : {
+                "dom-a" : A,
+                "dom-b" : B,
+                "dom-c" : C,
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

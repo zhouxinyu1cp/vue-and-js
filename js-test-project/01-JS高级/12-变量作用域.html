@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    var gender = "男"; 
+
+    function ff() {
+        // console.log(age); 
+        // age打印出来是undefined，既然有值，代表可以访问
+
+        console.log(height); // height不是在该作用域内声明的，所以不能访问
+
+        return function() {
+            var height = 100;
+        }
+
+        var age = 5;
+    }
+
+    // 注意：变量的声明和赋值是在两个不同的时期进行
+    function fn() {
+        console.log(age); // undefined
+        var age = 18;
+        console.log(age); // 18
+    }
+
+    // fn()执行时，首先找到函数内所有变量、函数的声明，把他们放在作用域中，给变量一个初始值：undefined ----> 变量可以访问
+    // 逐条执行代码，在执行代码的过程中，如果有赋值语句，对变量进行赋值
+
+    function fn() {
+        var age; // 初始值：undefined
+
+        console.log(age); // undefined
+        age = 18; // 修改了变量的值
+        console.log(age); // 18
+    }
+
+
+    function fn3() {
+        return function() {
+
+        }
+
+        var age = 15;
+    }
+    // ----> 相当于
+    function fn3() {
+        var age;
+
+        return function() {
+
+        }
+
+        age = 15;
+    }
+
+
+
+</script>
+
+</html>

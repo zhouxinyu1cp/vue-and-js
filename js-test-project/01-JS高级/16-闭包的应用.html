@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    // 闭包的应用，模块化开发 ---> （相当于Java中的类封装）
+    var ktv = (function KTV() {
+        // 为了保护该变量，将它放在函数内部
+        var leastPrice = 1000;
+
+        var total = 0;
+
+        return {
+            // 购物
+            buy : function(price) {
+                total += price;
+            },
+            // 结账
+            pay : function() {
+                if(total < leastPrice) {
+                    console.log("继续消费");
+                }
+                else {
+                    console.log("欢迎下次光临");
+                }
+            },
+            editLeast : function(id, price) {
+                if(id == 8888) {
+                    leastPrice = price;
+                    console.log("最低消费为：" + leastPrice);
+                }
+                else {
+                    console.log("权限不足");
+                }
+            }
+        }
+    })()
+
+    // var k = KTV();
+
+    var datepicker = (function() {
+        var hour = 3600 * 3600;
+        return function() {
+            console.log("日期控件初始化");
+        }
+    })();
+
+    var common = (function() {
+        return {
+            isStr : function() {
+
+            },
+            isNumber : function() {
+
+            }
+        }
+    })();
+
+</script>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script type="module">
+    // 若模块没有返回值，直接import
+    import './log.js'
+
+    // 从cart.js中导入cart模块，并且获取返回值，返回值的名字叫cart
+    import cart from "./cart.js"
+    console.log(cart);
+
+</script>
+
+</html>

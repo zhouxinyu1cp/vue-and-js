@@ -1,0 +1,103 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+    </style>
+</head>
+
+
+<body>
+    <div id = "app">
+        
+    </div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="./node_modules/axios/dist/axios.js"></script>
+    <script type="text/javascript">
+
+        var App = {
+            template : `
+                <div>
+                    <h3> 响应1：{{msg1}} </h3>
+                    <h3> 响应2：{{msg2}} </h3>
+
+                    <button @click = "sendReq">并发请求</button>
+                </div>
+            `,
+
+            data : function() {
+                return {
+                    msg1 : " ",
+                    msg2 : " ",
+                }
+            },
+
+            methods : {
+                sendReq() {
+                    // 并发请求
+
+                    this.$axios.defaults.baseURL = "http://127.0.0.1:8080/";
+
+                    var req1 = this.$axios.get("");
+                    var req2 = this.$axios.post("/add", "a=1");
+
+                    this.$axios.all([req1, req2])
+                        .then(this.$axios.spread( function(res1, res2) {
+                            this.msg1 = res1;
+                            this.msg2 = res2;
+                        }))
+                        .catch( function(err) {
+                            console.log(err);
+                        } );
+                }
+            }
+        };
+
+        Vue.prototype.$axios = axios;  // 把axios挂载到Vue实例上
+
+        new Vue({
+            el : "#app",
+
+            template : `<App />`,
+
+            components : {
+                App
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

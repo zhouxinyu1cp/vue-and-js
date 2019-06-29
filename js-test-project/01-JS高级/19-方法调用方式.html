@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    /* 方法调用方式 */
+
+    function Person() {
+        this.age = 20;
+    }
+
+    Person.prototype.run = function() {
+        console.log(this.age);
+    }
+
+    var p = new Person();
+    p.run(); // 打印 20
+
+
+    var p2 = {
+        height : 100,
+        travel : function() {
+            console.log(this.height);
+        }
+    }
+    p2.travel(); //打印 100
+
+
+    var clear = function() {
+        console.log(this.length);
+    }
+    var tom = {
+        c : clear,
+        length : 100
+    }
+    tom.c(); // 这里是方法调用，打印 100
+    // ---> this指向tom实例，结果为100
+
+    // 结论：由于clear()被当成tom.c()方法的形式进行调用，
+    //      函数内部的this指向调用该方法的对象：tom
+
+    var tony = {
+        d : clear,
+        length : 30
+    }
+    tony.d(); // 这里也是方法调用，clear()内部的this指向tony实例，打印 30
+
+</script>
+
+</html>

@@ -1,0 +1,98 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+    </style>
+</head>
+
+
+<body>
+    <div id = "app">
+        
+    </div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+
+        var subComponent = {
+            template : `
+                <div>  </div>
+            `,
+        };
+
+        Vue.component("subCom", subComponent);
+
+
+        var App = {
+            template : `
+                <div class = "app">
+                    <button ref = "btn"> 我是按钮 </button>
+                    <button ref = "btn2"> 另外一个按钮 </button>
+                    <subCom ref = "subc"> </subCom>
+                </div>
+            `,
+
+            methods : {
+                clickHandler() {
+                    this.msg = this.msg + "我这个去";
+                }
+            },
+
+            mounted : function() {
+                // 若在组件内部使用 this.$refs.xxx 获取的是原生js的 DOM 对象
+                // 如果是给组件绑定的ref属性，那么 this.$refs.xxx 获取的是组件对象
+                // ref引用的值不能重名
+
+                console.log(this.$refs.btn);  // 获取 DOM 中 ref=btn 的元素
+                console.log(this.$refs.btn2);
+                console.log(this.$refs.subc);
+            },
+        };
+
+
+        new Vue({
+            el : "#app",
+
+            template : `<App />`,
+
+            components : {
+                App
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

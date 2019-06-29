@@ -1,0 +1,124 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+    </style>
+</head>
+
+
+<body>
+    <div id = "app">
+        
+    </div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="./node_modules/axios/dist/axios.js"></script>
+    <script type="text/javascript">
+
+        var App = {
+            template : `
+                <div>
+                    <h3> 响应1：{{msg1}} </h3>
+                    <h3> 响应2：{{msg2}} </h3>
+
+                    <button @click = "sendReq">发请求</button>
+                </div>
+            `,
+
+            data : function() {
+                return {
+                    msg1 : " ",
+                    msg2 : " ",
+                }
+            },
+
+            methods : {
+                sendReq() {
+
+                    this.$axios.defaults.baseURL = "http://127.0.0.1:8080/";
+
+                    this.$axios.get("", {
+                        params : {id:1},
+                        // 响应结果传给 then() 前允许修改响应数据
+                        transformResponse : [
+                            function(data) {
+                                console.log(data);
+                                return data;
+                            }
+                        ],
+                    })
+                    .then(function(res) {
+                        console.log(res);
+                    })
+                    .catch(function(err) {
+                        console.log(err);
+                    });
+
+
+                    this.$axios.post("/add", "name=zhou", {
+                        // 在发送前对数据进行处理
+                        transformRequest : [
+                            function (data) {
+                                console.log(data);
+                                return "name=rose";
+                            }
+                        ],
+                    })
+                    .then(function(res) {
+                        console.log(res);
+                    })
+                    .catch(function(err) {
+                        console.log(err);
+                    });
+                }
+            }
+        };
+
+        Vue.prototype.$axios = axios;  // 把axios挂载到Vue实例上
+
+        new Vue({
+            el : "#app",
+
+            template : `<App />`,
+
+            components : {
+                App
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

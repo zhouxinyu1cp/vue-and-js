@@ -1,0 +1,148 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+    </style>
+</head>
+
+
+<body>
+    <div id = "app">
+        
+    </div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script type="text/javascript">
+
+        Vue.use(VueRouter);
+
+        var Pins = {
+            template : `
+                <div> 我是沸点 </div>
+            `,
+        };
+
+        var ComDesc = {
+            template : `
+                <div> {{msg}} </div>
+            `,
+
+            data : function() {
+                return {
+                    msg : " "
+                }
+            },
+
+            created() {
+                this.msg = "android";
+            },
+
+            // 监听动态路由切换时参数的变化
+            watch : {
+                '$route'(to, from) {
+                    // console.log(to);
+                    // console.log(from);
+
+                    this.msg = to.params.id;
+                }
+            }
+        };
+
+        var Timeline = {
+            template : `
+                <div id = "timeline"> 
+                    首页内容 <br/> <br/>
+
+                    <router-link :to="{name:'comDesc', params:{id : 'andorid'}}"> 安卓 </router-link>
+                    <router-link :to="{name:'comDesc', params:{id : 'frontend'}}"> 前端 </router-link>
+
+                    <router-view> </router-view>
+                </div>
+            `,
+        };
+
+        var rt = new VueRouter({
+            routes : [
+                {
+                    path : "/timeline",
+                    name : "timeline",
+                    component : Timeline,
+                    // 嵌套路由中的动态路由切换
+                    children : [
+                        {
+                            path : "/timeline/:id",
+                            name : "comDesc", 
+                            component : ComDesc,  
+                        }
+                    ],
+                },
+
+                {
+                    path : "/pins",
+                    component : Pins,
+                },
+            ],
+        });
+
+
+        var App = {
+            template : `
+                <div>
+                    <router-link to="/timeline"> 首页 </router-link>
+                    <router-link to="/pins"> 沸点 </router-link>
+
+                    <router-view> </router-view>
+                </div>
+            `,
+        };
+
+
+        new Vue({
+            el : "#app",
+
+            router : rt,
+
+            template : `<App />`,
+
+            components : {
+                App
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

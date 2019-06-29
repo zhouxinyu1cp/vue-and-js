@@ -1,0 +1,253 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        .main {
+            width : 100%;
+        }
+
+        .header {
+            width: 100%;
+            height: 80px;
+            background-color: purple;
+            text-align-last: center;
+        }
+
+        .main2 {
+            width: 100%;
+            text-align: center;
+        }
+
+        .aside {
+            float: left;
+            width: 30%;
+            height: 100%;
+            background-color: yellow;
+        }
+
+        .content {
+            float: left;
+            width: 70%;
+            height: 100%;
+            background-color: red;
+        }
+
+        .default {
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            background: #fff;
+            border: 1px solid #dcdfe6;
+            color: #606266;
+            -webkit-appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            margin: 0;
+            transition: .1s;
+            font-weight: 500;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        .success {
+            color: #fff;
+            background-color: #67c23a;
+            border-color: #67c23a;
+        }
+
+        .warning {
+            color: #fff;
+            background-color: #e6a23c;
+            border-color: #e6a23c;
+        }
+        
+    </style>
+</head>
+
+
+<body>
+    <div id = "app"></div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+
+        // 全局组件
+        // <slot>内置组件作为承载分发自定义内容的接口，
+        // Vbtn接收传来的"type"属性，并与button的class属性绑定，以实现定制化的Vbtn
+        Vue.component("Vbtn", {
+            template : `
+                <button class="default" :class = "type">
+                    <slot> </slot>
+                </button>
+            `,
+
+            props : ["type"],
+
+            data : function() {
+                return {
+                    
+                }
+            }, 
+        });
+
+
+        // <Vbtn>声明自定义属性"type"，type其实是一个属性选择器，在Vbtn定义中与button的class属性绑定
+        // @click.native -- 获取<Vbtn>中原生button的click事件
+        var Vcontent = {
+            template : ` 
+                <div class="content"> 我是内容组件
+                    <Vbtn type = "success" @click.native = "chufa()"> 登录 </Vbtn>
+                    <ul> 
+                        <li v-for='(item,idx) in pp'> 
+                            <h3> {{item.title}} </h3> 
+                            <h4> {{item.content}} </h4> 
+                        </li> 
+                    </ul> 
+                </div> 
+            `,
+
+            methods : {
+                chufa() {
+                    alert(1);
+                }
+            },
+
+            props : ['pp'],
+
+            data : function() {
+                return {
+
+                }
+            }
+        };
+
+        var Vaside = {
+            template : ` 
+                <div class="aside"> 我是侧边栏组件 
+                    <Vbtn type = "warning"> 侧边栏 </Vbtn>
+                </div> 
+            `,
+
+            data : function() {
+                return {
+
+                }
+            }
+        };
+
+        var Vheader = {
+            template : ` 
+                <div class="header"> 我是头部组件 
+                    <button v-on:click="changeFontSize()"> 改变所有字体大小 </button>
+                </div> 
+            `,
+
+            methods : {
+                changeFontSize() {
+                    // 2. 在子组件中触发父组件中声明的自定义事件 vue $emit()
+                    // $emit()中第一个参数是自定义事件的名字, 第二个参数是传进去的值
+
+                    this.$emit("changeFont");
+                }
+            },
+
+            data : function() {
+                return {
+
+                }
+            }
+        };
+
+        // 1. 在父组件中声明自定义事件 <Vheader v-on:changeFont = "changeHandler()" /> 
+        var App = {
+            template : ` 
+                <div class="main" v-bind:style="{fontSize : AllFontSize + 'px'}"> 
+                    <Vheader v-on:changeFont = "changeFontHandler()" /> 
+                    <div class="main2"> 
+                        <Vaside /> 
+                        <Vcontent v-bind:pp='posts'/> 
+                    </div> 
+                </div> 
+            `,
+
+            methods : {
+                changeFontHandler() {
+                    this.AllFontSize += 1;
+                }
+            },
+
+            data : function() {
+                return {
+                    posts : [
+                        {id : 1, title : "我这个去", content : "天王盖地虎"},
+                        {id : 2, title : "少了几分", content : "宝塔镇河妖"},
+                        {id : 3, title : "设计费乐山大佛", content : "小鸡炖蘑菇"},
+                    ],
+                    AllFontSize : 16,
+                }
+            },
+
+            components : {
+                Vheader,
+                Vaside,
+                Vcontent,
+            }
+        };
+
+        //---------------------------------------------------------------------------//
+
+        new Vue({
+            el : "#app",
+
+            template : '<App />',
+
+            data : function() {
+                return {
+
+                }
+            },
+
+            components : {
+                App
+            },
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

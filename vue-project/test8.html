@@ -1,0 +1,82 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        
+        
+    </style>
+</head>
+
+
+<body>
+    <div id = "app">
+        <input type="text" name="" v-model="msg" />
+        <h3> {{msg}} </h3>
+        <button @click = "stus[0].name = 'yangbingyu'"> 深度监视改值 </button>
+        <h4> {{stus[0].name}} </h4>
+    </div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+
+        /* 监听器 */
+
+        new Vue({
+            el : "#app",
+
+            data : function() {
+                return {
+                    msg : " ",
+
+                    stus : [{name : "jack"}],
+                }
+            },
+
+            // 监听器
+            watch : {
+                // 监听 msg 数据属性，newVal对应新值，oldVal对应旧值
+                msg : function(newVal, oldVal) {
+                    //console.log(newVal, oldVal);
+                    if(newVal == "zhou") {
+                        console.log(newVal);
+                    }
+                },
+
+                // 若要监听复杂数据类型，如数组、对象等，需要深度监视
+                stus : {
+                    deep : true,  // 深度监视
+                    handler : function(newVal, oldVal) {
+                        console.log(newVal[0].name);
+                    }
+                },
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

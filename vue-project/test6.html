@@ -1,0 +1,90 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        
+        
+    </style>
+</head>
+
+
+<body>
+    <div id = "app"></div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+
+        // 有名插槽
+        Vue.component("mySlot", {
+            template : `
+                <li> 
+                    预计第1个 <slot name = "one"></slot> 
+                    <br />
+                    预计第2个 <slot name = "two"></slot> 
+                </li>
+            `,
+        });
+
+
+        
+        var App = {
+            template : ` 
+                <div> 
+                    <ul>
+                        <mySlot>
+                            <h1 slot = "two"> 第一个槽 </h1>
+                            <h2 slot = "one"> 第二个槽 </h2>
+                        </mySlot>
+                    </ul>
+                </div> 
+            `,
+
+            data : function() {
+                return {
+                    
+                }
+            },
+        };
+
+        //---------------------------------------------------------------------------//
+
+        new Vue({
+            el : "#app",
+            
+            components : {
+                App
+            },
+            
+            template : '<App />',
+
+           
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

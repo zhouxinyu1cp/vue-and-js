@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    div.onclick = function() {
+
+    }   
+    // 类似于
+    div.onclick = ()=>{}
+    
+
+    // 有参的匿名函数
+    var fn = function(name) {
+        console.log(name);
+    }
+    // 等价于：
+    var fn = (name) => {
+        console.log(name);
+    }
+
+
+    // 有2个或2个以上参数的匿名函数
+    var q = function(name, age) {
+
+    }
+    // 等价于：
+    var q = (name, age) => {
+        // 切记：()不能省略
+    }
+
+
+    var students = [1,3,5];
+    students.forEach( function(val, idx) {
+
+    } )
+    students.forEach( (val, idx) => {
+        
+    } )
+
+
+</script>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    var p = {
+        age : 18,
+
+        // es6中方法的箭头函数形式
+        run : () => {
+            setTimeout( ()=>{
+                console.log(this); // this指向window实例
+            }, 1000);
+        },
+
+        travel : function() {
+            // 箭头函数的外层函数中 this指向p实例
+            setTimeout( () => {
+                console.log(this); // this指向p实例
+            }, 1000);
+        }, 
+
+        // 推荐使用的方式：es6中方法的简写形式
+        say() {
+            console.log("say()中的this实例：", this);
+
+            setTimeout( () => {
+                console.log("say()内部的延迟函数的this实例：", this);
+            }, 1000);
+        },
+    };
+
+    p.run();
+
+    p.travel();
+
+    p.say();
+
+</script>
+
+</html>

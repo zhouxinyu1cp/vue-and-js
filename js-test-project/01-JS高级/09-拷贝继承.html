@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    // 1、已经拥有了o3对象
+    var o3 = {gender:"男", grade:"初三", name:"张三"};
+
+    var o4 = {};
+
+    // 2、创建一个o3对象的拷贝（克隆）：for ... in 循环
+    for (var key in o3) {  // 遍历o3中的每个属性
+        o4[key] = o3[key]; // 获取对应的属性值，把属性值放到o4中
+    }
+
+    console.log(o4);
+
+    // 3、修改克隆对象，把该对象的name属性改为"李四"
+    o4.name = "李四";
+
+    console.log(o4);
+
+    // 。。。后面修改了o4对象中的相关属性，就不会影响到o3
+
+</script>
+
+
+</html>

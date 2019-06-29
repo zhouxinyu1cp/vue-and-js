@@ -1,0 +1,123 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+    </style>
+</head>
+
+
+<body>
+    <div id = "app">
+        
+    </div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script type="text/javascript">
+
+        // 让Vue使用该VueRouter
+        Vue.use(VueRouter);
+
+
+        // 登录组件
+        var Login = {
+            template : `
+            <div> 我是登录页面 </div>
+            `,
+        };
+
+        // 注册组件
+        var Register = {
+            template : `
+            <div> 我是注册页面 </div>
+            `,
+        };
+
+
+        // 创建路由对象
+        var rt = new VueRouter({
+            // 配置路由对象，配置 routes
+
+            routes : [
+                // 一系列路由匹配的规则
+
+                {
+                    path : "/login",
+                    name : "login",    // 命名路由
+                    component : Login,
+                },
+
+                {
+                    path : "/register",
+                    name : "register",
+                    component : Register,
+                },
+            ],
+        });
+
+
+        // 使用VueRouter后，自动引入两个全局组件 router-link 和 router-view，
+        // router-link 渲染成 <a> 标签，router-view装载path对应的组件
+
+        var App = {
+            template : `
+                <div>
+                    <!-- to属性等于 href属性 -->
+
+                    <router-link :to="{name : 'login'}"> 登录 </router-link>
+                    <router-link :to="{name : 'register'}"> 注册 </router-link>
+
+                    <router-view> </router-view>
+                </div>
+            `,
+        };
+
+
+        new Vue({
+            el : "#app",
+
+            router : rt,  // 一定要在Vue对象中加载VueRouter对象
+
+            template : `<App />`,
+
+            components : {
+                App
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

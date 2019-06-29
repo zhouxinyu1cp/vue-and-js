@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    // 上下文调用方式有3种：call、apply、bind
+
+    function f1() {
+        console.log(this);
+    }
+    // call()的第1个参数决定了函数内部的this的值
+    f1.call([1,2,3]);
+    f1.call({age:10, height:200});
+    f1.call(1);
+    f1.call("abc");
+    f1.call(true);
+    f1.call(null);
+    f1.call(undefined);
+    // 上述代码可以用apply完全替换
+
+    // 结论：call()的第1个参数：
+    // 1、如果是一个对象类型，函数内部的this指向该对象
+    // 2、如果是undefined、null，则函数内部的this指向window实例
+    // 3、如果是数字，this对应Number构造函数的实例
+    //     --->  1 -- new Number(1)
+    // 4、如果是字符串，this对应String构造函数的实例
+    //     --->  "abcd" -- new String("abcd")
+    // 5、如果是布尔值，this对应Boolean构造函数的实例
+    //     --->  false -- new Boolean(false)
+
+
+</script>
+
+</html>

@@ -1,0 +1,74 @@
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+
+<body>
+    <a href="#/login">登录页面</a>
+    <a href="#/register">注册页面</a>
+
+    <div id = "app">
+        
+    </div>
+
+
+    <script type="text/javascript">
+
+        window.onhashchange = function() {
+            console.log(location.hash);
+
+            switch(location.hash) {
+                case "#/login":
+                    document.getElementById("app").innerText = "我是登录页面";
+                    break;
+
+                case "#/register":
+                    document.getElementById("app").innerText = "我是注册页面";
+                    break;
+
+                default:
+                    break;
+            }
+        };
+        
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

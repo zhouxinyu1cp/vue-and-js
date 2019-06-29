@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.say = function() {}
+    }
+
+    var p1 = new Person();
+    var p2 = new Person();
+
+    // p1.say()和p2.say()不是同一个方法
+    console.log(p1.say == p2.say);
+
+    // 解决方案：把say()方法写在它们共同的父对象中
+    // 它们共同的父对象通过Person.prototype获取
+
+    // 只要把say()方法写在Person.prototype中，say()方法就是同一个方法
+    Person.prototype.run = function() {
+        console.log("speed is 500km/h");
+    }
+
+    // 此时p1和p2都能调用run()
+    p1.run();
+    p2.run();
+
+    console.log(p1.run == p2.run); // 同一个run()方法，避免了内存的浪费
+
+    console.log(p1.run == Person.prototype.run); // true
+    
+    // 结论：只要往某个构造函数的prototype中添加属性、方法，这些属性、方法都可以被该构造函数的所有实例对象共享
+
+    // 这里的 【构造函数的prototype对象】称为原型对象
+    // Person.prototype是p1、p2的原型对象
+    // Person.prototype是Person构造函数的【实例】的原型对象
+
+    // Person的原型对象？
+    //   ---> Person的构造函数：Function
+    //   ---> 所以，Person的原型对象是：Function.prototype
+
+    // p1的原型对象？
+    //   ---> p1是谁创建的（p1的构造函数）：Person
+    //   ---> 所以，p1的原型对象是：Person.prototype
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

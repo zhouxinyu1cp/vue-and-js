@@ -1,0 +1,90 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+    </style>
+</head>
+
+
+<body>
+    <div id = "app">
+        
+    </div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+
+        var App = {
+            template : `
+                <div>
+                    <input type = "text" v-show = "isShow" ref = "inputbox">
+                </div>
+            `,
+
+            data : function() {
+                return {
+                    isShow : false,
+                }
+            },
+
+            mounted : function() {
+                this.isShow = true;
+                console.log(this.$refs.inputbox);
+
+                // $nextTick在 DOM 更新结束后执行延迟回调，
+                // 在数据更新后使用$nextTick，可以在回调函数中获取到更新后的 DOM
+                this.$nextTick(function() {
+
+                    // 获取的是更新后的 DOM
+                    this.$refs.inputbox.focus();
+                });
+            },
+        };
+
+
+        new Vue({
+            el : "#app",
+
+            template : `<App />`,
+
+            components : {
+                App
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

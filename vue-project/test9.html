@@ -1,0 +1,115 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 2px;
+        }
+
+        .active {
+            background-color: aquamarine;
+        }
+
+        textarea {
+            width:200px; 
+            height:200px;
+            font-size: 20px;
+            text-align: auto;
+        }
+        
+    </style>
+</head>
+
+
+<body>
+    <div id = "app">
+        <textarea>
+            {{ getCurrentDataAttach }}
+        </textarea>
+
+        <ul>
+            <li v-for = "(item, idx) in datas" @click = "clickHandler(idx)" :class = "{active : currentIndex == idx}">
+                
+                <h3> {{item.id}} - 名字：{{item.name}} </h3>
+                <p> {{item.author}} </p>
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+
+        var listData = [
+            {id : 1, name : "mj", author : "张亮", attach : "有用很好"},
+            {id : 2, name : "文物界", author : "霸下", attach : "神兽"},
+            {id : 3, name : "清明上河图", author : "侯府", attach : "嘿嘿嘿"},
+            {id : 4, name : "乱流", author : "事宜成前台", attach : "妹子漂亮"},
+        ];
+
+        new Vue({
+            el : "#app",
+
+            data : function() {
+                return {
+                    datas : listData,
+                    currentIndex : 0,
+                }
+            },
+
+            // computed可以监控多个数据属性，
+            // 实时监控 datas 和 currentIndex 的变化，并返回对应数据项的属性
+            computed : {
+                getCurrentDataAttach : function() {
+                    // 默认只有 getter
+                    return this.datas[this.currentIndex].attach;
+                }
+            },
+
+            methods : {
+                clickHandler(idx) {
+                    this.currentIndex = idx;
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

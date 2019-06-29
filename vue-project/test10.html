@@ -1,0 +1,180 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+    </style>
+</head>
+
+
+<body>
+    <div id = "app">
+        <App> </App>
+    </div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+
+        /*
+            生命周期函数：
+                beforeCreate
+                created
+                beforeMount
+                mounted
+                beforeUpdate
+                updated
+                activated
+                deactivated
+                beforeDestroy
+                destroyed
+                errorCaptured   
+        */
+
+
+        var Test = {
+            template : `
+                <div>
+                    {{msg}}
+                    <br />
+                    <button @click = "clickHandler()"> 改变事件 </button>
+                </div>
+            `,
+
+            methods : {
+                clickHandler() {
+                    this.msg = this.msg + "我这个去";
+                }
+            },
+
+            data : function() {
+                return {
+                    msg : "hello world",
+                }
+            },
+
+            // 组件创建之前--被调用
+            beforeCreate : function() {
+                console.log(this.msg);
+            },
+            
+            // 组件创建之后--被调用，只要使用了该组件，created()便会被调用
+            // 应用：可在组件被创建后请求后端数据
+            created : function() {
+                console.log(this.msg);
+            },
+
+            // 装载数据到 DOM 前被调用
+            beforeMount : function() {
+                console.log(document.getElementById("app"));
+            },
+
+            // 装载数据到 DOM 后被调用，Vue作用以后的DOM
+            mounted : function() {
+                console.log(document.getElementById("app"));
+            },
+
+            // 在更新 DOM 之前调用，可以获取原始 DOM
+            beforeUpdate : function() {
+                console.log(document.getElementById("app").innerHTML);
+            },
+
+            // 在更新 DOM 之后调用，可以获取最新的 DOM
+            updated : function() {
+                console.log(document.getElementById("app").innerHTML);
+            },
+
+            // 销毁组件前 调用
+            beforeDestroy : function() {
+                console.log("beforeDestroy");
+            },
+
+            // 销毁组件后 调用
+            destroyed : function() {
+                console.log("destroyed");
+            },
+
+            // 激活组件时 调用
+            activated : function() {
+                console.log("组件被激活了");
+            },
+
+            // 组件停用时（当前组件被缓存在内存中，切换到其他组件上） 调用
+            deactivated : function() {
+                console.log("组件暂时停用了");
+            },
+        };
+
+         
+        // Vue的 <keep-alive> 内置组件，能在组件的切换过程中将状态保留在内存中，防止重复渲染 DOM
+        var App = {
+            template : `
+                <div>
+                    <keep-alive>
+                            <Test v-if = "flag"> </Test>
+                    </keep-alive>
+                    <br />
+                    <button @click = "flag = !flag"> 改变生死 </button>
+                </div>
+            `,
+
+            data : function() {
+                return {
+                    flag : true,
+                }
+            },
+
+            components : {
+                Test
+            },
+        };
+
+
+        new Vue({
+            el : "#app",
+
+            data : function() {
+                return {
+                    
+                }
+            },
+
+            components : {
+                App
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

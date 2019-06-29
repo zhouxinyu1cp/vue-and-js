@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    function q() {
+        return new Promise( (resolve, reject) => {
+            setTimeout( () => {
+                resolve("你好");
+            }, 1000)
+        })
+    }
+
+    (async function() {
+        const res = await q();
+        console.log("第一次", res); // res值为"你好"
+
+        const res2 = await q();
+        console.log("第二次", res2);
+
+        const res3 = await q();
+        console.log("第三次", res3);
+    })()
+
+
+    // 语法错误，await必须放在async函数内部
+    // await q();
+
+    var o1 = {
+        run : async function() {
+            console.log("run方法");
+
+            console.log(await q());
+        },
+
+        say : async () => {
+            console.log("say方法");
+
+            let r = await q();
+            console.log(r);
+        }
+    }
+
+    // o1.say();
+
+
+    // 需求，先执行完say()，再执行run()
+    var fn = async function() {
+        await o1.say();
+        await o1.run();
+    };
+
+    fn();
+
+
+</script>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+    // var p = {age:100, gender:"男", say:function(){}};
+    // var p = {age:100, gender:"男", say:function(){}};
+    // var p = {age:100, gender:"男", say:function(){}};
+
+    // 上述代码，存在冗余，所有的p对象都有say方法，占据了不同的内存，导致内存浪费
+
+    // 构造函数
+    function Person(age, gender) {
+        this.age = age;
+        this.gender = gender;
+    }
+
+    // 此时，Person是构造函数
+    var p = new Person(18, "zhou");
+    var p1 = new Person(20, "song");
+
+
+
+</script>
+
+
+</html>

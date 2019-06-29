@@ -1,0 +1,171 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        .main {
+            width : 100%;
+        }
+
+        .header {
+            width: 100%;
+            height: 80px;
+            background-color: purple;
+            text-align-last: center;
+        }
+
+        .main2 {
+            width: 100%;
+            text-align: center;
+        }
+
+        .aside {
+            float: left;
+            width: 30%;
+            height: 100%;
+            background-color: yellow;
+        }
+
+        .content {
+            float: left;
+            width: 70%;
+            height: 100%;
+            background-color: red;
+        }
+        
+    </style>
+</head>
+
+
+<body>
+    <div id = "app"></div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+
+        // 定义全局组件
+        Vue.component('Vbtn', {
+            template : '<button> 按钮 </button>',
+            data : function() {
+                return {
+
+                }
+            }
+        });
+
+
+        //---------------------------------------------------------------------------//
+        var Vcontent = {
+            template : ' \
+                <div class="content"> 我是内容区  <Vbtn/> </div> \
+            ',
+
+            data : function() {
+                return {
+
+                }
+            }
+        };
+
+        var Vaside = {
+            template : ' \
+                <div class="aside"> 我是侧边栏 <Vbtn /> </div> \
+            ',
+
+            data : function() {
+                return {
+
+                }
+            }
+        };
+
+        var Vheader = {
+            template : ' \
+                <div class="header"> 我是头部 <Vbtn> </div> \
+            ',
+
+            data : function() {
+                return {
+
+                }
+            }
+        };
+
+
+        // 1. 声明局部组件
+        var App = {
+            template : ' \
+                <div class="main"> \
+                    <Vheader /> \
+                    <div class="main2"> \
+                        <Vaside /> \
+                        <Vcontent /> \
+                    </div> \
+                </div> \
+            ',
+
+            data : function() {
+                return {
+
+                }
+            },
+
+            components : {
+                Vheader,
+                Vaside,
+                Vcontent,
+            }
+        };
+
+        //---------------------------------------------------------------------------//
+
+        new Vue({
+            el : "#app",
+
+            // 3. 使用组件
+            template : '<App />',
+            
+            data : function() {
+                return {
+
+                }
+            },
+
+            // 2. 挂载组件
+            components : {
+                App
+            },
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

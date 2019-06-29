@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+    
+    function _fn() {
+        return 5;
+    }
+    var s = new _fn(); // s是_fn()的实例
+
+    function _fn3() {}
+    var q1 = new _fn3(); // q1是_fn3()的实例
+
+    function fn3() {
+        return [1, 2, 3]; 
+    }
+    var qw = new fn3(); // qw=[1,2,3]，qw不是fn3()的实例
+    console.log(qw);
+
+    // 除了5个基本数据类型，其他的都是复杂数据类型
+
+</script>
+
+</html>

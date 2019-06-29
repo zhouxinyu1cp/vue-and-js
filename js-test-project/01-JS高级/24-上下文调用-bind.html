@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    var obj = {
+        age : 18, 
+        run : function() {
+            setTimeout( function() {
+                console.log(this.age); // 这里的this指向window实例
+                // 打印出 undefined
+            }, 50);
+        }
+    };
+    obj.run();
+
+    // bind()是es5中才有的（IE9+）
+
+
+
+    var obj2 = {
+        age : 18, 
+        run : function() {
+            setTimeout( (function() {
+                console.log(this.age);
+            }).bind(this), 50);
+            // 执行bind()，匿名函数本身并没有执行，只是改变了该函数内部的this的值，指向obj2实例
+        }
+    };
+    obj2.run();
+
+
+    // bind()基本用法
+    function speed() {
+        console.log(this.seconds);
+    }
+    // 执行bind()后，产生了一个新函数，新函数的逻辑和原来一样，
+    // 不同的是this指向 {seconds : 100}
+    var speedBind = speed.bind({seconds : 100});
+    speedBind(); // 打印 100
+
+
+    (function eat() {
+        console.log(this.seconds); // 300
+    }).bind({seconds:300}); 
+
+    
+    var obj5 = {
+        name : "西瓜",
+        drink : (function() {
+            // this指向了：{name:"可乐"}
+            console.log(this.name);
+        }).bind({name:"可乐"})
+    };
+    obj5.drink(); // "可乐"
+
+
+    var p10 = {
+        height : 88,
+        run : function() {
+            setInterval( (function() {
+                console.log(this.height);
+            }).bind(this), 1000);
+        }
+    };
+    p10.run(); // 打印 88
+
+
+</script>
+
+</html>

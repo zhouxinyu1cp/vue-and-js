@@ -1,0 +1,98 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+
+    <style>
+        .act {
+            color : red;
+        }
+
+        .deact {
+            color : green;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id = "app"> {{msg}} <br/> {{ 1 > 2 ? "很好" : "很无语" }}
+            <p v-text="msg2"></p>
+            <div v-if="flag">多少水电费</div>
+            <div v-if="Math.random() < 0.5">随机值小于0.5</div>
+            <ul>
+                <li v-for="(item,idx) in menuList">
+                    <h3>Index: {{idx}}</h3>
+                    <h4>{{item.name}}</h4>
+                    <h5>{{item.price}}</h5>
+                </li>
+            </ul>
+            <ul>
+                <li v-for="(val, key) in object">
+                    {{key}} -- {{val}}
+                </li>
+            </ul>
+
+            <p class="deact" v-bind:class=" {act:isRed} ">bing绑定</p>
+            <button v-on:click="alter('测试一下S')">改变颜色</button>
+    </div>
+
+
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el : "#app",  
+            data : function() {
+                return {
+                    msg : "你妹的",
+                    msg2 : "另一种方式",
+                    flag : false,
+                    menuList : [
+                        {id:1, name:"蛋", price:30},
+                        {id:2, name:"花", price:40},
+                        {id:3, name:"菜", price:50},
+                        {id:4, name:"肉", price:60},
+                    ],
+                    object : {
+                        name : "宋福红",
+                        age : 20,
+                        fav : "跳跳",
+                    },
+                    pstyle : "act",
+                    isRed : false,
+                }
+            },
+            methods : {
+
+            },
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

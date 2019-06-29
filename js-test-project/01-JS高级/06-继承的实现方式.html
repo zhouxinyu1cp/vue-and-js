@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    function Cat(name) {
+        this.name = name;
+    }
+
+    var tom = new Cat("Tom");
+
+    // 目的：把say()方法放在tom的原型对象（Cat.prototype）中
+    Cat.prototype.say = function() {};
+
+    // 改良版，将 Cat.prototype 重新生成一个对象
+    Cat.prototype = {
+        a1 : function() {},
+        a2 : function() {},
+        a3 : function() {},
+        a4 : function() {},
+        a5 : function() {},
+    };
+
+    console.log(tom.say); // 可以访问
+    console.log(tom.a1);  // undefined
+
+    // 原因：tom对象在创建时已经有了一个确定的原型对象，即旧的Cat.prototype，
+    // 由于Cat.prototype被重新赋值，但tom实例的原型对象并没有改变，所以tom实例不能访问到新原型对象中的a1-a5方法
+
+    // 解决这个问题：
+    // ---> 先改变原型、再创建对象
+
+</script>
+
+</html>

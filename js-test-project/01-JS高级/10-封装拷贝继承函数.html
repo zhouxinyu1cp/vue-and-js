@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    function extend(src, dst) {
+        for (var key in src) {
+            dst[key] = src[key];
+        }
+    }
+
+    var o3 = {gender:"男", grade:"初三", name:"张三"};
+    var o4 = {};
+
+    extend(o3, o4);
+
+    console.log(o4);
+    o4.name = "李四";
+    
+
+</script>
+
+</html>
